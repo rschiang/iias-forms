@@ -25,7 +25,7 @@
 	}
 
 	thead, tbody, tfoot {
-		border: 2pt black solid;
+		border: 1.5pt black solid;
 	}
 
 	th {
@@ -38,7 +38,7 @@
 	}
 
 	th, td {
-		border: 1pt black solid;
+		border: 0.75pt black solid;
 		padding: 0.15rem 0.2rem;
 	}
 
@@ -52,6 +52,11 @@
 		text-indent: -1em;
 	}
 
+	ul > ul > ul {
+		font-size: .875em;
+		line-height: 1;
+	}
+
 	strong {
 		font-weight: 900;
 	}
@@ -62,12 +67,25 @@
 		color: red;
 	}
 
+	.compact {
+		line-height: 1em;
+	}
+
+	.bracket { /* typesetting  */
+		display: inline-block;
+		margin: 0 -.33em;
+		text-indent: 0;
+	}
+
 	input, textarea {
 		margin: 0;
 		padding: 0;
-		border: 0 none;
 		min-width: 1em;
 		font: inherit;
+	}
+
+	input[type="text"] {
+		text-align: left;
 	}
 
 	input[type="number"] {
@@ -90,6 +108,10 @@
 		resize: none;
 	}
 
+	ul.loose li {
+		margin-top: 1em;
+	}
+
 	.signatures {
 		display: flex;
 		flex-flow: column wrap;
@@ -105,6 +127,14 @@
 		break-before: always;
 	}
 
+	@media screen {
+		body {
+			margin: auto;
+			padding: 1.28em; /* ≈ 0.5cm / 11pt */
+			max-width: 54em; /*  21cm / 11pt */
+		}
+	}
+
 	@media print {
 		@page {
 			size: A4 portrait;
@@ -112,7 +142,11 @@
 		}
 
 		html, body {
-			font-size: 12pt;
+			font-size: 11pt;
+		}
+
+		input {
+			border: 0 transparent none;
 		}
 	}
 </style>
@@ -128,23 +162,23 @@
 	</thead>
 	<tbody>
 		<tr>
-			<th>品名</th>
-			<th>數量</th>
-			<th>單價（元）</th>
-			<th>預估總價<br>實報實銷</th>
-			<th>用途說明（含擬放置地點）</th>
-			<th>附件（名稱）</th>
+			<th width="16%">品名</th>
+			<th width="10%">數量</th>
+			<th width="10%">單價<span class="bracket">（元）</span></th>
+			<th width="12%" class="compact">預估總價<br>實報實銷</th>
+			<th>用途說明<span class="bracket">（含擬放置地點）</span></th>
+			<th width="16%">附件<span class="bracket">（名稱）</span></th>
 		</tr>
 		<tr id="item" valign="top">
-			<td><input type="text" id="itemName" placeholder="品名"></td>
+			<td><input type="text" id="itemName" placeholder="品名" value="圖書一批"></td>
 			<td><input type="number" id="itemQuantity" value="1" min="0"></td>
 			<td><input type="number" id="itemPrice" value="0" min="0"></td>
 			<td><input type="number" id="itemTotal" value="0" min="0" readonly></td>
 			<td rowspan="2">
-				<textarea id="description" rows="11" placeholder="用途"></textarea>
+				<textarea id="description" rows="10" placeholder="用途">計畫用非典藏圖書（〇〇〇研究室）</textarea>
 			</td>
 			<td>
-				<textarea id="attachments" rows="10" placeholder="附件（一件一行）">估價單</textarea>
+				<textarea id="attachments" rows="9" placeholder="附件（一件一行）">估價單</textarea>
 			</td>
 		</tr>
 		<tr>
@@ -155,11 +189,11 @@
 		<tr valign="top">
 			<td colspan="4">
 				經費來源
-				<ul>
-					<li><input type="checkbox">本所經費：</li>
-					<li><input type="checkbox">本院學術研究與人才培育計畫經費<br>計畫名稱：</li>
-					<li><input type="checkbox">科技部計畫經費<br>計畫編號：</li>
-					<li><input type="checkbox">院外計畫及其他經費：</li>
+				<ul class="loose">
+					<li><input type="checkbox">本所經費：<input type="text"></li>
+					<li><input type="checkbox">本院學術研究與人才培育計畫經費<br>計畫名稱：<input type="text"></li>
+					<li><input type="checkbox">科技部計畫經費<br>計畫編號：<input type="text"></li>
+					<li><input type="checkbox">院外計畫及其他經費：<input type="text"></li>
 				</ul>
 			</td>
 			<td colspan="2">
@@ -171,7 +205,7 @@
 							<li><input type="checkbox">個人研究雜支</li>
 						</ul>
 					</li>
-					<li>設備費<em>(單價一萬元《含》以上及使用年限2年《含》以上)</em>
+					<li>設備費<em><span class="bracket">（單價一萬元<span class="bracket">《含》</span>以上及使用年限2年<span class="bracket">《含》</span>以上）</span></em>
 						<ul>
 							<li><input type="checkbox">雜項</li>
 							<li><input type="checkbox">圖書(含期刊、電子資料庫等不限金額)</li>
@@ -190,7 +224,7 @@
 			<th scope="row">科研採購方式</th>
 			<td colspan="5">
 				<ul>
-					<li><input type="checkbox">小額採購（採購金額未達10萬元）
+					<li><input type="checkbox">小額採購<span class="bracket">（採購金額未達10萬元）</span>
 						<ul>
 							<li><input type="checkbox">依國庫集中支付作業要點相關規定支付</li>
 							<li><input type="checkbox">申請信用卡支付
@@ -203,12 +237,12 @@
 							</li>
 						</ul>
 					</li>
-					<li><input type="checkbox">逕行採購（採購金額10萬元以上未達30萬元）
+					<li><input type="checkbox">逕行採購<span class="bracket">（採購金額10萬元以上未達30萬元）</span>
 						<ul>
 							<li><input type="checkbox">依國庫集中支付作業要點相關規定支付</li>
 						</ul>
 					</li>
-					<li><input type="checkbox">公開招標-科研採購網(採購金額30萬元以上)</li>
+					<li><input type="checkbox">公開招標-科研採購網<span class="bracket">（採購金額30萬元以上）</span></li>
 				</ul>
 				<em>※採取小額採購或逕行採購時，廠商報價不得高於共同供應契約之契約價金。</em><br>
 				<em>※申請信用卡支付需符合本院個人信用卡支付相關規定。</em>
