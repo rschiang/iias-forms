@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" class="wide">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="form.css">
+	<link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
+	<title>場地申請單</title>
+</head>
+<body>
+<table>
+	<caption>中央研究院法律學研究所使用會議室申請單</caption>
+	<tr class="extra-height">
+		<th scope="row" width="17%" align="justify">申請人</th>
+		<td align="right">（簽名）</td>
+		<th scope="row" width="16%" align="justify">申請日期</th>
+		<td width="33%" align="center" class="dense"><input type="number" id="year" size="3"> 年 <input type="number" id="month" size="2" min="1" max="12"> 月 <input type="number" id="day" size="2" min="1" max="31">日</td>
+	</tr>
+	<tr class="extra-height">
+		<th scope="row" align="justify">使用日期<br>及時間</th>
+		<td colspan="3" class="dense">
+			自<input type="number" size="3">年<input type="number" size="2" min="1" max="12">月<input type="number" size="2" min="1" max="31">日（星期<input type="text" size="1" placeholder="〇">）<input type="text" size="1" placeholder="〇">午<input type="number" size="2" min="0" max="24">時<input type="number" size="2" min="0" max="59">分<br>
+			迄<input type="number" size="3">年<input type="number" size="2" min="1" max="12">月<input type="number" size="2" min="1" max="31">日（星期<input type="text" size="1" placeholder="〇">）<input type="text" size="1" placeholder="〇">午<input type="number" size="2" min="0" max="24">時<input type="number" size="2" min="0" max="59">分
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" align="justify" class="double-line">會議室</th>
+		<td colspan="3">
+			（<input type="checkbox" class="check-mark">）第一會議室　（<input type="checkbox" class="check-mark">）第二會議室
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" align="justify" class="double-line">使用人數</th>
+		<td colspan="3">
+			<input type="number" size="3" min="1" value="4"> <span>人</span>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" align="justify" class="double-line">事由</th>
+		<td colspan="3">
+			<textarea rows="6">讀書會討論使用。</textarea>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row" align="justify">借用設備<br>（請勾選）</th>
+		<td colspan="3" class="nested">
+			<table>
+				<tr>
+					<td width="40%">麥克風</td>
+					<td align="center" width="10%"><input type="checkbox" class="check-mark" checked></td>
+					<td width="40%">錄音設備</td>
+					<td align="center" width="10%"><input type="checkbox" class="check-mark"></td>
+				</tr>
+				<tr>
+					<td>播音系統</td>
+					<td align="center"><input type="checkbox" class="check-mark" checked></td>
+					<td>錄影設備<small class="bracket">（第一會議室）</small></td>
+					<td align="center"><input type="checkbox" class="check-mark"></td>
+				</tr>
+				<tr>
+					<td>吊掛式單槍投影機</td>
+					<td align="center"><input type="checkbox" class="check-mark" checked></td>
+					<td>其他</td>
+					<td align="center"><input type="checkbox" class="check-mark"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" align="center">備註：會議室請保持清潔，使用後請將門窗關上。</td>
+	</tr>
+</table>
+<ul class="signatures">
+	<li>經辦：</li>
+	<li>副所長：</li>
+	<li>所長核示：</li>
+	<li class="break">會辦：</li>
+	<li>　</li>
+	<li>影送日期：</li>
+</ul>
+<script>
+	(function() {
+		const now = new Date()
+		year.value = now.getFullYear() - 1911
+		month.value = now.getMonth() + 1
+		day.value = now.getDate()
+	})();
+</script>
+</body>
+</html>

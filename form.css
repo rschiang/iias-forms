@@ -30,6 +30,11 @@ table {
   border-collapse: collapse;
 }
 
+caption {
+  font-size: 1.4rem;
+  padding-bottom: 1em;
+}
+
 thead, tbody, tfoot {
   border: 1.5pt black solid;
 }
@@ -58,6 +63,18 @@ th {
 th, td {
   border: 0.75pt black solid;
   padding: 0.15rem 0.2rem;
+}
+
+.nested {
+  padding: 0;
+}
+
+.nested table, .nested tbody {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 ul {
@@ -154,6 +171,11 @@ ul.loose li {
   line-height: 2;
 }
 
+.extra-height td {
+  padding-top: 1.2em;
+  padding-bottom: 1.2em;
+}
+
 .signatures {
   display: flex;
   flex-flow: column wrap;
@@ -195,6 +217,21 @@ ul.loose li {
 
   input, textarea {
     border: 0 transparent none;
+  }
+
+  input[type="checkbox"].check-mark {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline;
+  }
+
+  input[type="checkbox"].check-mark::before {
+    content: '\3000';
+  }
+
+  input[type="checkbox"].check-mark:checked::before {
+    content: '\2714';
   }
 
   textarea:empty {
