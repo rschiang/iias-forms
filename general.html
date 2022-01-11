@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" class="wide">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="form.css">
+	<link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
+	<title>通用申請單</title>
+</head>
+<body>
+<table>
+	<thead class="no-repeat">
+		<tr>
+			<th align="justify" colspan="2">中央研究院<br>法律學研究所</th>
+			<th align="justify" width="50%">通用申請單</th>
+		</tr>
+		<tr>
+			<td align="justify" colspan="2">申請人：     （簽名）</td>
+			<td align="justify">日期：　<input type="number" id="year" size="3">年　<input type="number" id="month" size="2" min="1" max="12">月　<input type="number" id="day" size="2" min="1" max="31">日</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="3">
+				申請事項：<br>
+				<textarea rows="5">職〇〇為執行本所 111 年度研究組群計畫「〇〇〇〇〇」，擬⋯⋯，所需費用並請同意由本所年度業務費項下支應。
+敬請鈞長惠予同意。</textarea>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row" width="20%">預計刊登<br>本所網頁</th>
+			<td colspan="2"><input type="checkbox">刊登中英文網站　<input type="checkbox">僅刊登中文網站　<input type="checkbox" checked>不刊登</td>
+		</tr>
+		<tr>
+			<th scope="row">預計刊登<br>期間</th>
+			<td align="justify" colspan="2">自<input type="number" size="3">年<input type="number" size="2" min="1" max="12">月<input type="number" size="2" min="1" max="31">日<input type="number" size="2" min="0" max="24">時　迄<input type="number" size="3">年<input type="number" size="2" min="1" max="12">月<input type="number" size="2" min="1" max="31">日<input type="number" size="2" min="0" max="24">時</td>
+		</tr>
+		<tr>
+			<th colspan="3">擬　　辦</th>
+		</tr>
+		<tr>
+			<td colspan="3">承辦人：<br><br><br></td>
+		</tr>
+		<tr>
+			<th colspan="3">會　　辦</th>
+		</tr>
+		<tr>
+			<td colspan="3">內會：<br><br><br></td>
+		</tr>
+		<tr>
+			<th colspan="3">副所長核閱</th>
+		</tr>
+		<tr>
+			<td colspan="3"><br><br></td>
+		</tr>
+		<tr>
+			<th colspan="3">所長決行</th>
+		</tr>
+		<tr>
+			<td colspan="3"><br><br></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="3">
+				<ul>
+					<li><input type="checkbox" id="noAttachment" checked>無附件</li>
+					<li><input type="checkbox" id="hasAttachment">有附件，共 <input type="number" id="attachmentCount" size="1" min="0" value="0"> 件：<br>
+						<textarea id="attachments" rows="2" placeholder="1. "></textarea>
+					</li>
+				</ul>
+				<em>※請申請人自行填列</em>
+			</td>
+	</tfoot>
+</table>
+<footer>
+	收件日期：<br>影送日期：
+</footer>
+<script>
+	(function() {
+		const now = new Date()
+		year.value = now.getFullYear() - 1911
+		month.value = now.getMonth() + 1
+		day.value = now.getDate()
+
+		attachments.addEventListener('input', (e) => {
+			const text = e.target.value.trim()
+			const count = text.length > 0 ? text.split('\n').length : 0
+			attachments.rows = Math.max(count + (e.target.value.endsWith('\n') ? 1 : 0), 2)
+			attachmentCount.value = count
+			noAttachment.checked = !(hasAttachment.checked = (count > 0))
+		})
+	})();
+</script>
+</body>
+</html>
