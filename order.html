@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<style>
+	* {
+		box-sizing: border-box;
+	}
+
+	html, body {
+		font-family: Times, 'Kaiti TC', 'BiauKai', 標楷體, cursive;
+	}
+
+	header {
+		font-size: .75rem;
+		font-weight: bold;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	thead, tbody, tfoot {
+		border: 2pt black solid;
+	}
+
+	th {
+		font-weight: bold;
+		text-align: center;
+	}
+
+	thead th {
+		font-size: 1.6rem;
+	}
+
+	th, td {
+		border: 1pt black solid;
+		padding: 0.15rem 0.2rem;
+	}
+
+	ul {
+		margin: 0;
+		padding: 0 0 0 1em;
+		list-style: none;
+	}
+
+	li {
+		text-indent: -1em;
+	}
+
+	strong {
+		font-weight: 900;
+	}
+
+	em {
+		font-weight: 500;
+		font-style: normal;
+		color: red;
+	}
+
+	input, textarea {
+		margin: 0;
+		padding: 0;
+		border: 0 none;
+		min-width: 1em;
+		font: inherit;
+	}
+
+	input[type="number"] {
+		-moz-appearance: textfield;
+		text-align: center;
+	}
+
+	table input[type="number"] {
+		text-align: right;
+	}
+
+	input[length] {
+		width: 3em;
+		width: attr(length em);
+	}
+
+	textarea, td > input:only-child {
+		width: 100%;
+		height: 100%;
+		resize: none;
+	}
+
+	.signatures {
+		display: flex;
+		flex-flow: column wrap;
+	}
+
+	.signatures > li {
+		width: 40%;
+		padding: 1em 0 2em 0;
+		text-indent: 0;
+	}
+
+	.break {
+		break-before: always;
+	}
+
+	@media print {
+		@page {
+			size: A4 portrait;
+			margin: 0.5cm;
+		}
+
+		html, body {
+			font-size: 12pt;
+		}
+	}
+</style>
+<body>
+<header>
+	填單日期：民國<input type="number" id="year" length="3">年<input type="number" id="month" length="2" min="1" max="12">月<input type="number" id="day" length="2" min="1" max="31">日
+</header>
+<table>
+	<thead>
+		<tr>
+			<th colspan="6">中央研究院法律學研究所　　　請購單</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>品名</th>
+			<th>數量</th>
+			<th>單價（元）</th>
+			<th>預估總價<br>實報實銷</th>
+			<th>用途說明（含擬放置地點）</th>
+			<th>附件（名稱）</th>
+		</tr>
+		<tr id="item" valign="top">
+			<td><input type="text" id="itemName" placeholder="品名"></td>
+			<td><input type="number" id="itemQuantity" value="1" min="0"></td>
+			<td><input type="number" id="itemPrice" value="0" min="0"></td>
+			<td><input type="number" id="itemTotal" value="0" min="0" readonly></td>
+			<td rowspan="2">
+				<textarea id="description" rows="11" placeholder="用途"></textarea>
+			</td>
+			<td>
+				<textarea id="attachments" rows="10" placeholder="附件（一件一行）">估價單</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" align="right">合計：</td>
+			<td align="right"><span id="itemsTotal">0</span></td>
+			<td>計 <span id="attachmentCount">0</span> 件</td>
+		</tr>
+		<tr valign="top">
+			<td colspan="4">
+				經費來源
+				<ul>
+					<li><input type="checkbox">本所經費：</li>
+					<li><input type="checkbox">本院學術研究與人才培育計畫經費<br>計畫名稱：</li>
+					<li><input type="checkbox">科技部計畫經費<br>計畫編號：</li>
+					<li><input type="checkbox">院外計畫及其他經費：</li>
+				</ul>
+			</td>
+			<td colspan="2">
+				用途別
+				<ul>
+					<li>業務費
+						<ul>
+							<li><input type="checkbox">一般業務費</li>
+							<li><input type="checkbox">個人研究雜支</li>
+						</ul>
+					</li>
+					<li>設備費<em>(單價一萬元《含》以上及使用年限2年《含》以上)</em>
+						<ul>
+							<li><input type="checkbox">雜項</li>
+							<li><input type="checkbox">圖書(含期刊、電子資料庫等不限金額)</li>
+							<li><input type="checkbox">資訊
+								<ul>
+									<li><input type="checkbox">硬體</li>
+									<li><input type="checkbox">軟體</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><input type="checkbox">其他：</li>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">科研採購方式</th>
+			<td colspan="5">
+				<ul>
+					<li><input type="checkbox">小額採購（採購金額未達10萬元）
+						<ul>
+							<li><input type="checkbox">依國庫集中支付作業要點相關規定支付</li>
+							<li><input type="checkbox">申請信用卡支付
+								<ul>
+									<li><input type="checkbox">非專任採購人員且非經常性辦理採購，以零用金支付時，為簡化先行借支零用金等程序，新臺幣1萬元以下須當場付款之小額採購。</li>
+									<li><input type="checkbox">需以信用卡付款之網路採購，<em>如註冊費、論文抽印本、論文發表費、論文摘要費、網路購書等</em>。</li>
+									<li><input type="checkbox">因公出國，於出差地零星採購公務物品者。</li>
+									<li><input type="checkbox">新臺幣2萬元以下，須當場付款之因業務需要與外賓餐敍者。</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><input type="checkbox">逕行採購（採購金額10萬元以上未達30萬元）
+						<ul>
+							<li><input type="checkbox">依國庫集中支付作業要點相關規定支付</li>
+						</ul>
+					</li>
+					<li><input type="checkbox">公開招標-科研採購網(採購金額30萬元以上)</li>
+				</ul>
+				<em>※採取小額採購或逕行採購時，廠商報價不得高於共同供應契約之契約價金。</em><br>
+				<em>※申請信用卡支付需符合本院個人信用卡支付相關規定。</em>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<ul class="signatures">
+	<li>請購人：</li>
+	<li>會　辦：</li>
+	<li>副所長：</li>
+	<li>所長核示：</li>
+	<li class="break">採購人員：</li>
+</ul>
+<script>
+	(function() {
+		const now = new Date()
+		year.value = now.getFullYear() - 1911
+		month.value = now.getMonth() + 1
+		day.value = now.getDate()
+
+		attachments.addEventListener('input', (e) => {
+			const text = e.target.value.trim()
+			attachmentCount.textContent = text.length > 0 ? text.split('\n').length : 0
+		})
+		item.addEventListener('input', (e) => {
+			itemsTotal.textContent = itemTotal.value = itemPrice.value * itemQuantity.value
+		})
+	})();
+</script>
+</body>
+</html>
