@@ -1,0 +1,13 @@
+/* narrow.css - Polyfill for @page calc() support */
+
+:root, :root.narrow {
+  --base-size-pt: 11;
+  --page-margin-cm: 0.5;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0.5cm;
+  }
+}

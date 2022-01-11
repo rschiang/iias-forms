@@ -7,7 +7,7 @@
   --page-margin-cm: 2;
 }
 
-.narrow {
+html.narrow {
   --base-size-pt: 11;
   --page-margin-cm: 0.5;
 }
@@ -20,7 +20,7 @@ html, body {
   font-family: Times, 'Kaiti TC', 'BiauKai', 標楷體, cursive;
 }
 
-header {
+header, footer {
   font-size: .75rem;
   font-weight: bold;
 }
@@ -43,8 +43,16 @@ th {
   text-align: center;
 }
 
-thead th {
+.h1, thead th {
   font-size: 1.6rem;
+}
+
+.h2 {
+  font-size: 1.4rem;
+}
+
+.h3 {
+  font-size: 1.2rem;
 }
 
 th, td {
@@ -107,17 +115,29 @@ input[type="number"] {
   text-align: center;
 }
 
-table input[type="number"] {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+table input[type="number"]:only-child {
   text-align: right;
 }
 
-input[length] {
+input[size] {
   width: 3em;
-  width: attr(length em);
+  width: attr(size em);
 }
 
 [align="justify"] > input {
   text-align: center;
+}
+
+.dense input[size] {
+  width: 2em;
+  margin: 0 -0.05em;
+  padding: 0;
 }
 
 textarea, td > input:only-child {
@@ -128,6 +148,10 @@ textarea, td > input:only-child {
 
 ul.loose li {
   margin-top: 1em;
+}
+
+.double-line {
+  line-height: 2;
 }
 
 .signatures {
@@ -148,7 +172,7 @@ ul.loose li {
 @media screen {
   html {
     font-size: calc(100% * var(--base-size-pt) / 12);
-    background: #fefefe;
+    background: #fdfdfd;
   }
 
   body {
@@ -162,7 +186,7 @@ ul.loose li {
 @media print {
   @page {
     size: A4 portrait;
-    margin: calc(1cm * var(--page-margin-cm));
+    margin: 2cm; /*calc(1cm * var(--page-margin-cm)); // FF BUG */
   }
 
   html, body {
@@ -171,6 +195,10 @@ ul.loose li {
 
   input, textarea {
     border: 0 transparent none;
+  }
+
+  textarea:empty {
+    display: none;
   }
 
   ::placeholder {
