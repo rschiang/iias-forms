@@ -140,4 +140,8 @@ ul.loose li {
   input, textarea {
     border: 0 transparent none;
   }
+
+  ::placeholder {
+    color: transparent;
+  }
 }

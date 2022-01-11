@@ -124,6 +124,7 @@
 			const text = e.target.value.trim()
 			attachmentCount.textContent = text.length > 0 ? text.split('\n').length : 0
 		})
+
 		item.addEventListener('input', (e) => {
 			itemsTotal.textContent = itemTotal.value = itemPrice.value * itemQuantity.value
 		})
