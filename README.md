@@ -3,6 +3,9 @@ IIAS Forms
 
 Forms for desperate RAs.
 
+* [General Application Form](general.html)
+* [Procurement Form](procure.html)
+
 How to Use
 ----------
 
