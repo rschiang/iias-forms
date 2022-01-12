@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<th scope="row" width="20%">預計刊登<br>本所網頁</th>
-			<td colspan="2"><input type="checkbox">刊登中英文網站　<input type="checkbox">僅刊登中文網站　<input type="checkbox" checked>不刊登</td>
+			<td colspan="2"><input type="checkbox" name="announcement">刊登中英文網站　<input type="checkbox" name="announcement">僅刊登中文網站　<input type="checkbox" name="announcement" checked>不刊登</td>
 		</tr>
 		<tr>
 			<th scope="row">預計刊登<br>期間</th>
@@ -64,8 +64,8 @@
 		<tr>
 			<td colspan="3">
 				<ul>
-					<li><input type="checkbox" id="noAttachment" checked>無附件</li>
-					<li><input type="checkbox" id="hasAttachment">有附件，共 <span id="attachmentCount">0</span> 件：<br>
+					<li><input type="checkbox" name="attachment" id="noAttachment" checked>無附件</li>
+					<li><input type="checkbox" name="attachment" id="hasAttachment">有附件，共 <span id="attachmentCount">0</span> 件：<br>
 						<textarea id="attachments" rows="2" placeholder="1. "></textarea>
 					</li>
 				</ul>
@@ -82,6 +82,13 @@
 		year.value = now.getFullYear() - 1911
 		month.value = now.getMonth() + 1
 		day.value = now.getDate()
+
+		document.addEventListener('input', (e) => {
+			const sender = e.target
+			if (sender.type === 'checkbox' && sender.name !== "" && sender.checked)
+				for (const i of document.getElementsByName(sender.name))
+					if (sender !== i) i.checked = false
+		})
 
 		attachments.addEventListener('input', (e) => {
 			const text = e.target.value.trim()

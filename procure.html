@@ -48,10 +48,10 @@
 			<td colspan="4">
 				<strong>經費來源</strong>
 				<ul class="loose">
-					<li><input type="checkbox">本所經費：<input type="text"></li>
-					<li><input type="checkbox">本院學術研究與人才培育計畫經費<br>計畫名稱：<input type="text"></li>
-					<li><input type="checkbox" checked>科技部計畫經費<br>計畫編號：<input type="text" value="109-2410-H-001-000"></li>
-					<li><input type="checkbox">院外計畫及其他經費：<input type="text"></li>
+					<li><input type="checkbox" name="budget">本所經費：<input type="text"></li>
+					<li><input type="checkbox" name="budget">本院學術研究與人才培育計畫經費<br>計畫名稱：<input type="text"></li>
+					<li><input type="checkbox" name="budget" checked>科技部計畫經費<br>計畫編號：<input type="text" value="109-2410-H-001-000"></li>
+					<li><input type="checkbox" name="budget">院外計畫及其他經費：<input type="text"></li>
 				</ul>
 			</td>
 			<td colspan="2">
@@ -59,48 +59,48 @@
 				<ul>
 					<li>業務費
 						<ul>
-							<li><input type="checkbox" checked>一般業務費</li>
-							<li><input type="checkbox">個人研究雜支</li>
+							<li><input type="checkbox" name="intent" checked>一般業務費</li>
+							<li><input type="checkbox" name="intent">個人研究雜支</li>
 						</ul>
 					</li>
 					<li>設備費<em><span class="bracket">（單價一萬元<span class="bracket">《含》</span>以上及使用年限2年<span class="bracket">《含》</span>以上）</span></em>
 						<ul>
-							<li><input type="checkbox">雜項</li>
-							<li><input type="checkbox">圖書<span class="bracket">（含期刊、電子資料庫等不限金額）</span></li>
-							<li><input type="checkbox">資訊
+							<li><input type="checkbox" name="intent">雜項</li>
+							<li><input type="checkbox" name="intent">圖書<span class="bracket">（含期刊、電子資料庫等不限金額）</span></li>
+							<li><input type="checkbox" name="intent">資訊
 								<ul>
-									<li><input type="checkbox">硬體</li>
-									<li><input type="checkbox">軟體</li>
+									<li><input type="checkbox" name="intentIT">硬體</li>
+									<li><input type="checkbox" name="intentIT">軟體</li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><input type="checkbox">其他：<input type="text"></li>
+					<li><input type="checkbox" name="intent">其他：<input type="text"></li>
 			</td>
 		</tr>
 		<tr>
 			<th scope="row">科研採購方式</th>
 			<td colspan="5">
 				<ul>
-					<li><input type="checkbox" checked>小額採購<span class="bracket">（採購金額未達10萬元）</span>
+					<li><input type="checkbox" name="method" checked>小額採購<span class="bracket">（採購金額未達10萬元）</span>
 						<ul>
-							<li><input type="checkbox" checked>依國庫集中支付作業要點相關規定支付</li>
-							<li><input type="checkbox">申請信用卡支付
+							<li><input type="checkbox" name="methodSmVal" checked>依國庫集中支付作業要點相關規定支付</li>
+							<li><input type="checkbox" name="methodSmVal">申請信用卡支付
 								<ul>
-									<li><input type="checkbox">非專任採購人員且非經常性辦理採購，以零用金支付時，為簡化先行借支零用金等程序，新臺幣1萬元以下須當場付款之小額採購。</li>
-									<li><input type="checkbox">需以信用卡付款之網路採購，<em>如註冊費、論文抽印本、論文發表費、論文摘要費、網路購書等</em>。</li>
-									<li><input type="checkbox">因公出國，於出差地零星採購公務物品者。</li>
-									<li><input type="checkbox">新臺幣2萬元以下，須當場付款之因業務需要與外賓餐敍者。</li>
+									<li><input type="checkbox" name="methodSmValCred">非專任採購人員且非經常性辦理採購，以零用金支付時，為簡化先行借支零用金等程序，新臺幣1萬元以下須當場付款之小額採購。</li>
+									<li><input type="checkbox" name="methodSmValCred">需以信用卡付款之網路採購，<em>如註冊費、論文抽印本、論文發表費、論文摘要費、網路購書等</em>。</li>
+									<li><input type="checkbox" name="methodSmValCred">因公出國，於出差地零星採購公務物品者。</li>
+									<li><input type="checkbox" name="methodSmValCred">新臺幣2萬元以下，須當場付款之因業務需要與外賓餐敍者。</li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><input type="checkbox">逕行採購<span class="bracket">（採購金額10萬元以上未達30萬元）</span>
+					<li><input type="checkbox" name="method">逕行採購<span class="bracket">（採購金額10萬元以上未達30萬元）</span>
 						<ul>
 							<li><input type="checkbox">依國庫集中支付作業要點相關規定支付</li>
 						</ul>
 					</li>
-					<li><input type="checkbox">公開招標—科研採購網<span class="bracket">（採購金額30萬元以上）</span></li>
+					<li><input type="checkbox" name="method">公開招標—科研採購網<span class="bracket">（採購金額30萬元以上）</span></li>
 				</ul>
 				<em>※採取小額採購或逕行採購時，廠商報價不得高於共同供應契約之契約價金。</em><br>
 				<em>※申請信用卡支付需符合本院個人信用卡支付相關規定。</em>
@@ -121,6 +121,13 @@
 		year.value = now.getFullYear() - 1911
 		month.value = now.getMonth() + 1
 		day.value = now.getDate()
+
+		document.addEventListener('input', (e) => {
+			const sender = e.target
+			if (sender.type === 'checkbox' && sender.name !== "" && sender.checked)
+				for (const i of document.getElementsByName(sender.name))
+					if (sender !== i) i.checked = false
+		})
 
 		attachments.addEventListener('input', (e) => {
 			const text = e.target.value.trim()
