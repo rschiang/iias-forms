@@ -255,4 +255,10 @@ ul.loose li {
   ::placeholder {
     color: transparent;
   }
+
+  .no-print {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
 }
