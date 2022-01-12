@@ -17,7 +17,7 @@ html.wide {
 }
 
 html, body {
-  font-family: Times, 'Kaiti TC', 'BiauKai', 標楷體, cursive;
+  font-family: Times, 'Times New Roman', 'Kaiti TC', 'BiauKai', 標楷體, cursive, serif;
 }
 
 header, footer {
@@ -142,6 +142,14 @@ table input[type="number"]:only-child {
   text-align: right;
 }
 
+input[type="checkbox"] {
+  width: 1em;
+  height: 1em;
+  position: relative;
+  top: -.05em;
+  vertical-align: middle;
+}
+
 input[size] {
   width: 3em;
   width: attr(size em);
@@ -157,7 +165,7 @@ input[size] {
   padding: 0;
 }
 
-textarea, td > input:only-child {
+textarea, td > input:not([type="checkbox"]):only-child {
   width: 100%;
   height: 100%;
   resize: none;
@@ -191,6 +199,11 @@ ul.loose li {
   break-before: always;
 }
 
+.no-break {
+  break-before: avoid;
+  break-inside: avoid-page;
+}
+
 @media screen {
   html {
     font-size: calc(100% * var(--base-size-pt) / 12);
@@ -215,7 +228,7 @@ ul.loose li {
     font-size: calc(1pt * var(--base-size-pt));
   }
 
-  input, textarea {
+  input:not([type="checkbox"]), textarea {
     border: 0 transparent none;
   }
 
@@ -224,6 +237,7 @@ ul.loose li {
     -moz-appearance: none;
     appearance: none;
     display: inline;
+    position: static;
   }
 
   input[type="checkbox"].check-mark::before {
