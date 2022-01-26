@@ -7,6 +7,16 @@
 	<link rel="stylesheet" href="narrow.css">
 	<link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
 	<title>請購單</title>
+	<style>
+		#item input {
+			width: 100%;
+			resize: both;
+		}
+
+		#item input[type="number"] {
+			text-align: right;
+		}
+	</style>
 </head>
 <body>
 <header>
@@ -28,15 +38,23 @@
 			<th width="16%">附件<span class="bracket">（名稱）</span></th>
 		</tr>
 		<tr id="item" valign="top">
-			<td><input type="text" id="itemName" placeholder="品名" value="圖書一批"></td>
-			<td><input type="number" id="itemQuantity" value="1" min="0"></td>
-			<td><input type="number" id="itemPrice" value="0" min="0"></td>
-			<td><input type="number" id="itemTotal" value="0" min="0" readonly></td>
+			<td id="itemNames">
+				<input type="text" data-index="0" tabindex="10" placeholder="品名" value="圖書一批">
+			</td>
+			<td id="itemQuantities">
+				<input type="number" data-index="0" tabindex="10" value="1" min="0">
+			</td>
+			<td id="itemPrice">
+				<input type="number" data-index="0" tabindex="10" value="0" min="0">
+			</td>
+			<td id="itemTotal">
+				<input type="number" data-index="0" tabindex="10" value="0" min="0" readonly>
+			</td>
 			<td rowspan="2">
-				<textarea id="description" rows="10" placeholder="用途">計畫用非典藏圖書（〇〇〇研究室）</textarea>
+				<textarea id="description" rows="10" tabindex="99" placeholder="用途">計畫用非典藏圖書（〇〇〇研究室）</textarea>
 			</td>
 			<td>
-				<textarea id="attachments" rows="9" placeholder="附件（一件一行）">書局估價單</textarea>
+				<textarea id="attachments" rows="9" tabindex="99" placeholder="附件（一件一行）">書局估價單</textarea>
 			</td>
 		</tr>
 		<tr>
@@ -134,9 +152,37 @@
 			attachmentCount.textContent = text.length > 0 ? text.split('\n').length : 0
 		})
 
-		item.addEventListener('input', (e) => {
-			itemsTotal.textContent = itemTotal.value = itemPrice.value * itemQuantity.value
+		item.addEventListener('keydown', (e) => {
+			const sender = e.target
+			const i = Number(sender.dataset.index)
+			const len = itemNames.children.length
+			if (e.isComposing || (i + 1) < len) return
+			else if (e.key === "Enter") {
+				let nameEle = itemNames.appendChild(itemNames.children[0].cloneNode())
+				let quantityEle = itemQuantities.appendChild(itemQuantities.children[0].cloneNode())
+				let priceEle = itemPrice.appendChild(itemPrice.children[0].cloneNode())
+				let totalEle = itemTotal.appendChild(itemTotal.children[0].cloneNode())
+
+				nameEle.value = ""
+				quantityEle.value = priceEle.value = totalEle.value = 0
+				nameEle.dataset.index = quantityEle.dataset.index = priceEle.dataset.index = totalEle.dataset.index = len
+				nameEle.tabIndex = quantityEle.tabIndex = priceEle.tabIndex = totalEle.tabIndex = len + 10
+				nameEle.focus()
+			}
 		})
+
+		recalculatePrice = (e) => {
+			let grandTotal = 0
+			for (const ele of itemTotal.children) {
+				let i = ele.dataset.index
+				let total = ele.value = itemPrice.children[i].value * itemQuantities.children[i].value
+				grandTotal += total
+			}
+			itemsTotal.textContent = grandTotal
+		}
+
+		itemQuantities.addEventListener('input', recalculatePrice)
+		itemPrice.addEventListener('input', recalculatePrice)
 	})();
 </script>
 <!-- Document © 2022 Poren Chiang, CC BY-SA 4.0 https://poren.tw/iias-forms -->
