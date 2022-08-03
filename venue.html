@@ -19,8 +19,8 @@
 	<tr class="extra-height">
 		<th scope="row" align="justify">使用日期<br>及時間</th>
 		<td colspan="3" class="dense">
-			自<input type="number" id="res_start_year" size="3">年<input type="number" id="res_start_month" size="2" min="1" max="12">月<input type="number" id="res_start_day" size="2" min="1" max="31">日（星期<input type="text" id="res_start_weekday" size="1" placeholder="〇">）<input type="text" size="1" placeholder="〇">午<input type="number" size="2" min="0" max="24">時<input type="number" size="2" min="0" max="59">分<br>
-			迄<input type="number" id="res_end_year" size="3">年<input type="number" id="res_end_month" size="2" min="1" max="12">月<input type="number" id="res_end_day" size="2" min="1" max="31">日（星期<input type="text" id="res_end_weekday" size="1" placeholder="〇">）<input type="text" size="1" placeholder="〇">午<input type="number" size="2" min="0" max="24">時<input type="number" size="2" min="0" max="59">分
+			自<input type="number" id="res_start_year" size="3">年<input type="number" id="res_start_month" size="2" min="1" max="12">月<input type="number" id="res_start_day" size="2" min="1" max="31">日（星期<input type="text" id="res_start_weekday" size="1" placeholder="〇">）<input type="text" id="res_start_ampm" size="1" placeholder="〇">午<input type="number" size="2" min="0" max="24">時<input type="number" size="2" min="0" max="59">分<br>
+			迄<input type="number" id="res_end_year" size="3">年<input type="number" id="res_end_month" size="2" min="1" max="12">月<input type="number" id="res_end_day" size="2" min="1" max="31">日（星期<input type="text" id="res_end_weekday" size="1" placeholder="〇">）<input type="text" id="res_end_ampm" size="1" placeholder="〇">午<input type="number" size="2" min="0" max="24">時<input type="number" size="2" min="0" max="59">分
 		</td>
 	</tr>
 	<tr>
@@ -105,6 +105,18 @@
 				const date = ROCDate(res_end_year.value, res_end_month.value, res_end_day.value)
 				res_end_weekday.value = getKanjiWeekday(date)
 			} catch {}
+		});
+
+		const ampmEventHandler = (e) => {
+			if (e.code === "ArrowUp" || e.code === "ArrowDown")
+				e.target.value = (e.target.value === "上") ? "下" : "上"
+		};
+
+		res_start_ampm.addEventListener('keydown', ampmEventHandler)
+		res_end_ampm.addEventListener('keydown', ampmEventHandler)
+
+		res_start_ampm.addEventListener('blur', () => {
+			res_end_ampm.value = res_start_ampm.value
 		});
 	})();
 </script>
