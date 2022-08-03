@@ -19,8 +19,8 @@
 	<tr class="extra-height">
 		<th scope="row" align="justify">使用日期<br>及時間</th>
 		<td colspan="3" class="dense">
-			自<input type="number" size="3">年<input type="number" size="2" min="1" max="12">月<input type="number" size="2" min="1" max="31">日（星期<input type="text" size="1" placeholder="〇">）<input type="text" size="1" placeholder="〇">午<input type="number" size="2" min="0" max="24">時<input type="number" size="2" min="0" max="59">分<br>
-			迄<input type="number" size="3">年<input type="number" size="2" min="1" max="12">月<input type="number" size="2" min="1" max="31">日（星期<input type="text" size="1" placeholder="〇">）<input type="text" size="1" placeholder="〇">午<input type="number" size="2" min="0" max="24">時<input type="number" size="2" min="0" max="59">分
+			自<input type="number" id="res_start_year" size="3">年<input type="number" id="res_start_month" size="2" min="1" max="12">月<input type="number" id="res_start_day" size="2" min="1" max="31">日（星期<input type="text" id="res_start_weekday" size="1" placeholder="〇">）<input type="text" size="1" placeholder="〇">午<input type="number" size="2" min="0" max="24">時<input type="number" size="2" min="0" max="59">分<br>
+			迄<input type="number" id="res_end_year" size="3">年<input type="number" id="res_end_month" size="2" min="1" max="12">月<input type="number" id="res_end_day" size="2" min="1" max="31">日（星期<input type="text" id="res_end_weekday" size="1" placeholder="〇">）<input type="text" size="1" placeholder="〇">午<input type="number" size="2" min="0" max="24">時<input type="number" size="2" min="0" max="59">分
 		</td>
 	</tr>
 	<tr>
@@ -79,11 +79,33 @@
 	<li>影送日期：</li>
 </ul>
 <script>
+	const ROCDate = (year, month, day) => new Date(1911 + Number(year), Number(month) - 1, Number(day));
+	const getKanjiWeekday = (date) => '日一二三四五六'[date.getDay()];
+
 	(function() {
 		const now = new Date()
-		year.value = now.getFullYear() - 1911
-		month.value = now.getMonth() + 1
-		day.value = now.getDate()
+		year.value = res_start_year.value = res_end_year.value = now.getFullYear() - 1911
+		month.value = res_start_month.value = res_end_month.value = now.getMonth() + 1
+		day.value = res_start_day.value = res_end_day.value = now.getDate()
+		res_start_weekday.value = res_end_weekday.value = getKanjiWeekday(now)
+
+		res_start_day.addEventListener('blur', () => {
+			res_end_year.value = res_start_year.value
+			res_end_month.value = res_start_month.value
+			res_end_day.value = res_start_day.value
+
+			try {
+				const date = ROCDate(res_start_year.value, res_start_month.value, res_start_day.value)
+				res_start_weekday.value = res_end_weekday.value = getKanjiWeekday(date)
+			} catch {}
+		});
+
+		res_end_day.addEventListener('blur', () => {
+			try {
+				const date = ROCDate(res_end_year.value, res_end_month.value, res_end_day.value)
+				res_end_weekday.value = getKanjiWeekday(date)
+			} catch {}
+		});
 	})();
 </script>
 <!-- Document © 2022 Poren Chiang, CC BY-SA 4.0 https://poren.tw/iias-forms -->
