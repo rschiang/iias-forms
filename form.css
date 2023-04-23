@@ -204,6 +204,10 @@ ul.loose li {
   break-inside: avoid-page;
 }
 
+.wrap {
+  wrap-before: always;
+}
+
 @media screen {
   html {
     font-size: calc(100% * var(--base-size-pt) / 12);
