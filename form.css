@@ -205,7 +205,18 @@ ul.loose li {
 }
 
 .wrap {
-  wrap-before: always;
+  wrap-before: flex;
+}
+
+/* workaround for too-new CSS4 properties */
+@supports not (wrap-before: flex) {
+    .procure-form .signatures {
+        height: 18em;
+    }
+
+    .venue-form .signatures {
+        height: 13.5em;
+    }
 }
 
 @media screen {
@@ -252,7 +263,7 @@ ul.loose li {
     content: '\2714';
   }
 
-  textarea:empty {
+  textarea:blank {
     display: none;
   }
 
